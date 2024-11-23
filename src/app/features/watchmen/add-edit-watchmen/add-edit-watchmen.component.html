@@ -1,0 +1,189 @@
+<div class="container mx-auto p-4 bg-gray-100 shadow-2xl rounded-lg">
+  <div class="text-left mb-6 border-b pb-4 border-gray-300">
+    <h2 class="text-2xl md:text-3xl font-semibold text-gray-800">
+      {{ isEditMode ? "Edit" : "Add" }} watchmen
+    </h2>
+    <p class="text-sm text-gray-500">Fill in the details below</p>
+  </div>
+
+  <form
+    [formGroup]="watchmenForm"
+    (ngSubmit)="onSubmit()"
+    class="space-y-8 md:space-y-10"
+  >
+    <!-- watchmen Information Section -->
+    <div
+      class="bg-white p-6 md:p-8 border border-gray-300 rounded-lg shadow-sm"
+    >
+      <h3 class="text-lg md:text-xl font-semibold text-gray-700 mb-6">
+        watchmen Information
+      </h3>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- First Name Field -->
+        <app-input
+          label="First Name"
+          control="firstName"
+          id="firstName"
+          placeholder="Enter First Name"
+          errorMessage="First Name is required."
+        ></app-input>
+
+        <!-- Last Name Field -->
+        <app-input
+          label="Last Name"
+          control="lastName"
+          id="lastName"
+          placeholder="Enter Last Name"
+          errorMessage="Last Name is required."
+        ></app-input>
+
+        <!-- DOB Field -->
+        <app-input
+          label="Date of Birth"
+          control="dob"
+          id="dob"
+          inputType="date"
+          placeholder="Enter Date of Birth"
+          errorMessage="Date of Birth is required."
+        ></app-input>
+
+        <!-- Aadhar Number Field -->
+        <app-input
+          label="Aadhar Number"
+          control="aadharNumber"
+          id="aadharNumber"
+          placeholder="Enter Aadhar Number"
+          errorMessage="Aadhar Number is required."
+        ></app-input>
+      </div>
+    </div>
+
+    <!-- Contact Information Section -->
+    <div
+      class="bg-white p-6 md:p-8 border border-gray-300 rounded-lg shadow-sm"
+    >
+      <h3 class="text-lg md:text-xl font-semibold text-gray-700 mb-6">
+        Contact Information
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Phone Number Field -->
+        <app-input
+          label="Phone Number"
+          control="phoneNumber"
+          id="phoneNumber"
+          placeholder="Enter Phone Number"
+          errorMessage="Phone Number is required."
+        ></app-input>
+
+        <!-- City Field -->
+        <app-input
+          label="City"
+          control="city"
+          id="city"
+          placeholder="Enter City"
+          errorMessage="City is required."
+        ></app-input>
+
+        <!-- State Field -->
+        <app-input
+          label="State"
+          control="state"
+          id="state"
+          placeholder="Enter State"
+          errorMessage="State is required."
+        ></app-input>
+
+        <!-- Pincode Field -->
+        <app-input
+          label="Pincode"
+          control="pincode"
+          id="pincode"
+          inputType="number"
+          placeholder="Enter Pincode"
+          errorMessage="Pincode is required."
+        ></app-input>
+
+        <!-- Address Field -->
+        <app-input
+          class="col-span-2"
+          label="Address"
+          control="address"
+          id="address"
+          placeholder="Enter Address"
+          errorMessage="Address is required."
+        ></app-input>
+      </div>
+    </div>
+
+    <!-- Photo Upload Section -->
+    <div
+      class="bg-white p-6 md:p-8 border border-gray-300 rounded-lg shadow-sm"
+    >
+      <h3 class="text-lg md:text-xl font-semibold text-gray-700 mb-6">
+        Photo Upload
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+        <!-- File Upload Field -->
+        <div class="col-span-2">
+          <label
+            class="block mb-2 text-sm font-medium text-gray-700"
+            for="fileInput"
+          >
+            Upload Photo
+          </label>
+          <input
+            id="fileInput"
+            type="file"
+            (change)="onPhotoSelected($event)"
+            accept="image/*"
+            class="block w-full text-sm text-gray-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <p class="mt-1 text-xs text-gray-500">
+            Acceptable formats: JPG, PNG. Maximum size: 5MB.
+          </p>
+        </div>
+
+        <!-- Photo Preview -->
+        <div
+          *ngIf="photoPreview"
+          class="relative p-4 border border-gray-300 rounded-lg shadow-lg bg-white"
+        >
+          <h4 class="text-sm font-medium text-gray-600 mb-4 text-center">
+            Photo Preview
+          </h4>
+          <img
+            [src]="photoPreview"
+            alt="Photo Preview"
+            class="w-48 h-48 object-cover rounded-lg mx-auto"
+          />
+          <button
+            type="button"
+            (click)="clearPhoto()"
+            class="absolute top-2 right-2 bg-red-500 text-white text-xs p-1 rounded-full hover:bg-red-600"
+            title="Remove Photo"
+          >
+            ✕
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex justify-end gap-3">
+      <button
+        type="submit"
+        class="w-full md:w-auto text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5"
+      >
+        {{ isEditMode ? "Update" : "Submit" }}
+      </button>
+      <button
+        type="button"
+        (click)="onReset()"
+        class="w-full md:w-auto text-gray-700 bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-gray-400 font-medium rounded-lg text-sm px-5 py-2.5"
+      >
+        Reset
+      </button>
+    </div>
+  </form>
+</div>

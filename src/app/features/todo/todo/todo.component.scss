@@ -1,0 +1,175 @@
+/* Global Styles */
+body {
+  background-color: #f0f4f7;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  margin: 0;
+  /* Remove default margin */
+  padding: 20px;
+  /* Add padding around the body */
+}
+
+/* Container Styles */
+.todo-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  /* Changed to white for better contrast */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.todo-container h1 {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+/* Form Styles */
+.add-todo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  padding: 10px;
+  margin-right: 10px;
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+/* Button Styles */
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+button:disabled {
+  background-color: #ccc;
+}
+
+/* Todo List Styles */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+  /* Added border radius for rounded corners */
+  background-color: #ffffff;
+  /* White background for better contrast */
+}
+
+li:hover {
+  background-color: #f1f1f1;
+  /* Light gray on hover for visual feedback */
+}
+
+
+.completed {
+  text-decoration: line-through;
+  /* Strike-through effect */
+  color: #999;
+  /* Gray color for completed items */
+  font-style: italic;
+  /* Italicize completed items */
+}
+
+.todo-title {
+  flex-grow: 1;
+  font-size: 1.1rem;
+  /* Slightly larger font for better readability */
+  color: #333;
+  margin-right: 10px;
+  text-align: left;
+  /* Space between title and checkbox */
+}
+
+
+.todo-description,
+.description {
+  flex-grow: 1;
+  text-align: left;
+}
+
+li input[type="checkbox"] {
+  margin-right: 15px;
+  transform: scale(1.4);
+  /* Slightly larger checkbox for easier clicking */
+  cursor: pointer;
+}
+
+/* Delete Button Styles */
+li button {
+  background-color: transparent;
+  border: none;
+  color: #ff6b6b;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+li button:hover {
+  color: #ff4c4c;
+  transform: scale(1.1);
+  /* Slightly enlarge on hover */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+  li {
+    flex-direction: column;
+    /* Stack items on smaller screens */
+    align-items: flex-start;
+    /* Align items to the start */
+  }
+
+  .todo-title {
+    margin-right: 0;
+    /* Remove right margin on smaller screens */
+    margin-bottom: 5px;
+    /* Space below the title */
+  }
+
+  li input[type="checkbox"] {
+    margin-right: 0;
+    /* Remove margin on checkbox for smaller screens */
+  }
+
+  li button {
+    align-self: flex-end;
+    /* Align delete button to the right */
+  }
+}

@@ -1,0 +1,60 @@
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+  <table class="w-full text-sm text-left text-gray-500">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+      <tr>
+        <!-- Loop through the columns array to generate table headers dynamically -->
+        <th *ngFor="let col of columns" scope="col" class="px-6 py-3">
+          {{ col.display }}
+        </th>
+        <th scope="col" class="px-6 py-3">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Check if tableData is empty and show "No data available" -->
+      <tr *ngIf="tableData.length === 0">
+        <td
+          attr.colspan="{{ columns.length + 1 }}"
+          class="px-6 py-4 text-center text-gray-500"
+        >
+          No data available
+        </td>
+      </tr>
+
+      <!-- Loop through the tableData array to generate rows dynamically -->
+      <tr
+        *ngFor="let row of tableData; let i = index"
+        [ngClass]="{ 'bg-white': i % 2 === 0, 'bg-gray-50': i % 2 === 1 }"
+        class="border-b hover:bg-gray-100"
+      >
+        <!-- Loop through each column and bind data to the respective field -->
+        <td
+          *ngFor="let col of columns"
+          class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+        >
+          {{ row[col.key] }}
+        </td>
+        <td class="px-6 py-4">
+          <button
+            (click)="viewRow(row)"
+            class="font-medium text-yellow-600 hover:underline"
+          >
+            View
+          </button>
+
+          <button
+            (click)="editRow(row)"
+            class="font-medium text-blue-600 hover:underline ml-2"
+          >
+            Edit
+          </button>
+          <button
+            (click)="deleteRow(row)"
+            class="font-medium text-red-600 hover:underline ml-2"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

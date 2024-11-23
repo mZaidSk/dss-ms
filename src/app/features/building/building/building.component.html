@@ -1,0 +1,32 @@
+<div class="container mx-auto shadow-2xl h-full">
+  <div class="flex justify-between items-center p-4">
+    <div class="mb-1" [formGroup]="searchForm">
+      <input
+        type="search"
+        id="search"
+        formControlName="search"
+        class="bg-gray-100 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-56 p-2.5"
+        placeholder="search..."
+        required
+      />
+    </div>
+
+    <!-- Add Button -->
+    <button
+      (click)="addNewBuilding()"
+      class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+    >
+      Add
+    </button>
+  </div>
+
+  <!-- Reusable Table Component -->
+  <app-table
+    [tableData]="tableData"
+    [columns]="columns"
+    (onView)="handleView($event)"
+    (onEdit)="handleEdit($event)"
+    (onDelete)="handleDelete($event)"
+  >
+  </app-table>
+</div>

@@ -1,0 +1,90 @@
+<!-- watchmen-detail.component.html -->
+<div
+  class="container mx-auto p-8 bg-white shadow-2xl rounded-lg border border-gray-200 mt-10"
+  *ngIf="watchmen$ | async as watchmen; else loading"
+>
+  <!-- Header -->
+  <div class="flex items-center mb-6 pb-4 border-b border-gray-300">
+    <img
+      *ngIf="watchmen.photoURL"
+      [src]="watchmen.photoURL"
+      alt="watchmen Photo"
+      class="w-32 h-32 object-cover rounded-full border border-gray-300 mr-6"
+    />
+    <div class="flex-1">
+      <h2 class="text-2xl font-semibold text-gray-800">
+        {{ watchmen.firstName }} {{ watchmen.lastName }}
+      </h2>
+      <p class="text-sm text-gray-500">watchmen Details</p>
+    </div>
+    <!-- Edit Button -->
+    <button
+      (click)="onEditwatchmen()"
+      class="text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 ml-auto"
+    >
+      Edit
+    </button>
+  </div>
+
+  <!-- Details Sections -->
+  <div class="space-y-6">
+    <!-- Personal Information Section -->
+    <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+      <h3 class="text-lg font-semibold text-gray-700 mb-2">
+        Personal Information
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <h4 class="font-medium text-gray-700">Date of Birth:</h4>
+          <p class="text-gray-600">{{ watchmen.dob | date }}</p>
+        </div>
+        <div>
+          <h4 class="font-medium text-gray-700">Aadhar Number:</h4>
+          <p class="text-gray-600">{{ watchmen.aadharNumber }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Information Section -->
+    <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+      <h3 class="text-lg font-semibold text-gray-700 mb-2">
+        Contact Information
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <h4 class="font-medium text-gray-700">Phone Number:</h4>
+          <p class="text-gray-600">{{ watchmen.phoneNumber }}</p>
+        </div>
+        <div>
+          <h4 class="font-medium text-gray-700">Address:</h4>
+          <p class="text-gray-600">{{ watchmen.address }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Location Information Section -->
+    <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+      <h3 class="text-lg font-semibold text-gray-700 mb-2">
+        Location Information
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <h4 class="font-medium text-gray-700">City:</h4>
+          <p class="text-gray-600">{{ watchmen.city }}</p>
+        </div>
+        <div>
+          <h4 class="font-medium text-gray-700">State:</h4>
+          <p class="text-gray-600">{{ watchmen.state }}</p>
+        </div>
+        <div>
+          <h4 class="font-medium text-gray-700">Pincode:</h4>
+          <p class="text-gray-600">{{ watchmen.pincode }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>

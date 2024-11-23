@@ -1,0 +1,110 @@
+@if (formArrayControl) {
+<div [formArrayName]="formArrayControl">
+  <div class="relative mb-2" [formGroupName]="nestedControl">
+    <label [for]="id" class="block text-sm font-medium text-gray-700">
+      {{ label }}
+    </label>
+    <input
+      [type]="inputType"
+      [formControlName]="control"
+      [id]="id"
+      [placeholder]="placeholder"
+      class="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 bg-gray-100"
+    />
+    <div
+      *ngIf="
+        getFormArrayControl.get(control)?.invalid &&
+        getFormArrayControl.get(control)?.touched
+      "
+      class="text-red-500 text-sm mt-1 absolute -bottom-5"
+    >
+      {{ errorMessage }}
+    </div>
+  </div>
+</div>
+
+}@else if (nestedControl) {
+<div class="relative mb-2" [formGroupName]="nestedControl">
+  <label [for]="id" class="block text-sm font-medium text-gray-700">
+    {{ label }}
+  </label>
+  <input
+    [type]="inputType"
+    [formControlName]="control"
+    [id]="id"
+    [placeholder]="placeholder"
+    class="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 bg-gray-100"
+  />
+  <div
+    *ngIf="
+      getFormGroup.get(control)?.invalid && getFormGroup.get(control)?.touched
+    "
+    class="text-red-500 text-sm mt-1 absolute -bottom-5"
+  >
+    {{ errorMessage }}
+  </div>
+</div>
+}@else {
+<div class="relative mb-2">
+  <label [for]="id" class="block text-sm font-medium text-gray-700">
+    {{ label }}
+  </label>
+  <input
+    [type]="inputType"
+    [formControlName]="control"
+    [id]="id"
+    [placeholder]="placeholder"
+    class="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 bg-gray-100"
+  />
+  <div
+    *ngIf="form.get(control)?.invalid && form.get(control)?.touched"
+    class="text-red-500 text-sm mt-1 absolute -bottom-5"
+  >
+    {{ errorMessage }}
+  </div>
+</div>
+}
+<!--
+<div
+  *ngIf="formArrayControl; else groupCheck"
+  [formArrayName]="formArrayControl"
+>
+  <div [formGroupName]="nestedControl" class="relative mb-2">
+    <ng-container *ngTemplateOutlet="inputTemplate"></ng-container>
+  </div>
+</div>
+
+<ng-template #groupCheck>
+  <div
+    *ngIf="nestedControl; else defaultCheck"
+    [formGroupName]="nestedControl"
+    class="relative mb-2"
+  >
+    <ng-container *ngTemplateOutlet="inputTemplate"></ng-container>
+  </div>
+</ng-template>
+
+<ng-template #defaultCheck>
+  <div class="relative mb-2">
+    <ng-container *ngTemplateOutlet="inputTemplate"></ng-container>
+  </div>
+</ng-template>
+
+<ng-template #inputTemplate>
+  <label [for]="id" class="block text-sm font-medium text-gray-700">
+    {{ label }}
+  </label>
+  <input
+    [type]="inputType"
+    [formControlName]="control"
+    [id]="id"
+    [placeholder]="placeholder"
+    class="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 bg-gray-50"
+  />
+  <div
+    *ngIf="form.get(control)?.invalid && form.get(control)?.touched"
+    class="text-red-500 text-sm mt-1 absolute -bottom-5"
+  >
+    {{ errorMessage }}
+  </div>
+</ng-template> -->
