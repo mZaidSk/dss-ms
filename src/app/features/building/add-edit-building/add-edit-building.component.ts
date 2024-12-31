@@ -82,13 +82,6 @@ export class AddEditBuildingComponent implements OnInit {
             numberOfFloors: wing.numberOfFloors,
             roomsPerFloor: wing.roomsPerFloor,
           });
-
-          if (wing.watchmen) {
-            wing.watchmen.forEach(() => {
-              this.addwatchmen(currentWingGroup);
-            });
-            currentWingGroup.get('watchmen')?.patchValue(wing.watchmen);
-          }
         });
       }
     });
@@ -105,14 +98,7 @@ export class AddEditBuildingComponent implements OnInit {
       wingName: ['', Validators.required],
       numberOfFloors: ['', Validators.required],
       roomsPerFloor: ['', Validators.required],
-      watchmen: this.fb.array([]), // Initialized as an empty FormArray
-    });
-  }
-
-  createwatchmenGroup(): FormGroup {
-    return this.fb.group({
-      watchmenId: ['', Validators.required],
-      sift: ['', Validators.required],
+      // watchmen: this.fb.array([]), // Initialized as an empty FormArray
     });
   }
 
@@ -125,7 +111,7 @@ export class AddEditBuildingComponent implements OnInit {
       wingName: ['', Validators.required],
       numberOfFloors: [0, [Validators.required, Validators.min(1)]],
       roomsPerFloor: [0, [Validators.required, Validators.min(1)]],
-      watchmen: this.fb.array([]), // Add nested watchmen form array
+      // watchmen: this.fb.array([]), // Add nested watchmen form array
     });
 
     this.wings.push(wingGroup);
@@ -135,41 +121,27 @@ export class AddEditBuildingComponent implements OnInit {
     this.wings.removeAt(index);
   }
 
-  getWatchmen(wingIndex: number): FormArray {
-    return this.wings.at(wingIndex).get('watchmen') as FormArray;
-  }
-
-  addwatchmen(wing: AbstractControl) {
-    const wingGroup = wing as FormGroup;
-    const watchmen = wingGroup.get('watchmen') as FormArray;
-    watchmen.push(this.createwatchmenGroup());
-  }
-
-  removewatchmen(wingIndex: number, watchmenIndex: number): void {
-    this.getWatchmen(wingIndex).removeAt(watchmenIndex);
-  }
-
   onSubmit() {
     if (this.buildingForm.valid) {
-      const formValue: Building = this.buildingForm.value;
-      console.log(formValue);
+    }
+    const formValue: Building = this.buildingForm.value;
+    console.log(formValue);
 
-      if (this.isEditMode) {
-        this.buildingService
-          .updateBuilding(this.currentBuilding!.buildingId, formValue)
-          .then(() => {
-            console.log('Building updated successfully');
-            this.router.navigate([`building`]);
-          });
-      } else {
-        this.buildingForm
-          .get('buildingId')
-          ?.setValue(this.buildingForm.get('name')?.value);
-        this.buildingService.addBuilding(formValue).then(() => {
-          console.log('Building added successfully');
+    if (this.isEditMode) {
+      this.buildingService
+        .updateBuilding(this.currentBuilding!.buildingId, formValue)
+        .then(() => {
+          console.log('Building updated successfully');
           this.router.navigate([`building`]);
         });
-      }
+    } else {
+      this.buildingForm
+        .get('buildingId')
+        ?.setValue(this.buildingForm.get('name')?.value);
+      this.buildingService.addBuilding(formValue).then(() => {
+        console.log('Building added successfully');
+        this.router.navigate([`building`]);
+      });
     }
   }
 

@@ -1,7 +1,7 @@
 <div class="container mx-auto p-4 bg-gray-100 shadow-2xl rounded-lg">
   <div class="text-left mb-6 border-b pb-4 border-gray-300">
     <h2 class="text-2xl md:text-3xl font-semibold text-gray-800">
-      {{ isEditMode ? "Edit" : "Add" }} watchmen
+      {{ isEditMode ? "Edit" : "Add" }} Watchmen
     </h2>
     <p class="text-sm text-gray-500">Fill in the details below</p>
   </div>
@@ -11,14 +11,13 @@
     (ngSubmit)="onSubmit()"
     class="space-y-8 md:space-y-10"
   >
-    <!-- watchmen Information Section -->
+    <!-- Watchmen Information Section -->
     <div
       class="bg-white p-6 md:p-8 border border-gray-300 rounded-lg shadow-sm"
     >
       <h3 class="text-lg md:text-xl font-semibold text-gray-700 mb-6">
-        watchmen Information
+        Personal Information
       </h3>
-
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- First Name Field -->
         <app-input
@@ -48,6 +47,15 @@
           errorMessage="Date of Birth is required."
         ></app-input>
 
+        <!-- Phone Number Field -->
+        <app-input
+          label="Phone Number"
+          control="phoneNumber"
+          id="phoneNumber"
+          placeholder="Enter Phone Number"
+          errorMessage="Phone Number is required."
+        ></app-input>
+
         <!-- Aadhar Number Field -->
         <app-input
           label="Aadhar Number"
@@ -56,24 +64,84 @@
           placeholder="Enter Aadhar Number"
           errorMessage="Aadhar Number is required."
         ></app-input>
+
+        <!-- Gender -->
+        <div>
+          <label for="gender" class="block text-sm font-medium text-gray-700">
+            Gender
+          </label>
+          <select
+            formControlName="gender"
+            id="gender"
+            class="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 bg-gray-100"
+          >
+            <option value="" disabled>Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <!-- Place of Birth Field -->
+        <app-input
+          label="Place of Birth"
+          control="placeOfBirth"
+          id="placeOfBirth"
+          placeholder="Enter Place of Birth"
+          errorMessage="Place of Birth is required."
+        ></app-input>
+
+        <!-- Guards Qualification Field -->
+        <app-input
+          label="Guards Qualification"
+          control="guards_qualification"
+          id="guards_qualification"
+          placeholder="Enter Qualification"
+          errorMessage="Qualification is required."
+        ></app-input>
+        <!-- Role Field (new field) -->
+        <div>
+          <label for="role" class="block text-sm font-medium text-gray-700">
+            Role
+          </label>
+          <select
+            formControlName="role"
+            id="role"
+            class="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 bg-gray-100"
+          >
+            <option value="" disabled>Select Role</option>
+            <option value="supervisor">Supervisor</option>
+            <option value="guard">Guard</option>
+            <!-- <option value="Manager">Manager</option> -->
+          </select>
+        </div>
+
+        <!-- Password Field -->
+        <app-input
+          label="Password"
+          control="password"
+          id="password"
+          placeholder="Enter Password"
+          errorMessage="Password is required."
+        ></app-input>
       </div>
     </div>
 
-    <!-- Contact Information Section -->
+    <!-- Address Section -->
     <div
       class="bg-white p-6 md:p-8 border border-gray-300 rounded-lg shadow-sm"
     >
       <h3 class="text-lg md:text-xl font-semibold text-gray-700 mb-6">
-        Contact Information
+        Address
       </h3>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Phone Number Field -->
+        <!-- Address Field -->
         <app-input
-          label="Phone Number"
-          control="phoneNumber"
-          id="phoneNumber"
-          placeholder="Enter Phone Number"
-          errorMessage="Phone Number is required."
+          label="Address"
+          control="address"
+          id="address"
+          placeholder="Enter Address"
+          errorMessage="Address is required."
         ></app-input>
 
         <!-- City Field -->
@@ -99,68 +167,190 @@
           label="Pincode"
           control="pincode"
           id="pincode"
-          inputType="number"
           placeholder="Enter Pincode"
           errorMessage="Pincode is required."
         ></app-input>
 
-        <!-- Address Field -->
+        <!-- District Field -->
         <app-input
-          class="col-span-2"
-          label="Address"
-          control="address"
-          id="address"
-          placeholder="Enter Address"
-          errorMessage="Address is required."
+          label="District"
+          control="district"
+          id="district"
+          placeholder="Enter District"
+          errorMessage="District is required."
         ></app-input>
       </div>
     </div>
 
-    <!-- Photo Upload Section -->
+    <!-- Documents Section -->
+    <!-- Documents Section -->
     <div
       class="bg-white p-6 md:p-8 border border-gray-300 rounded-lg shadow-sm"
     >
       <h3 class="text-lg md:text-xl font-semibold text-gray-700 mb-6">
-        Photo Upload
+        Documents Upload
       </h3>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-        <!-- File Upload Field -->
-        <div class="col-span-2">
+        <!-- ID Upload Field -->
+        <div>
           <label
             class="block mb-2 text-sm font-medium text-gray-700"
-            for="fileInput"
+            for="idUpload"
+            >Upload ID</label
           >
-            Upload Photo
-          </label>
           <input
-            id="fileInput"
+            id="idUpload"
             type="file"
-            (change)="onPhotoSelected($event)"
+            (change)="onDocumentSelected($event, 'id')"
             accept="image/*"
             class="block w-full text-sm text-gray-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <p class="mt-1 text-xs text-gray-500">
-            Acceptable formats: JPG, PNG. Maximum size: 5MB.
+            Acceptable formats: JPG, PNG. Max size: 5MB.
+          </p>
+          <!-- Preview -->
+          <div
+            *ngIf="documentPreviews['id']"
+            class="relative mt-4 p-4 border border-gray-300 rounded-lg shadow-lg bg-white"
+          >
+            <h4 class="text-sm font-medium text-gray-600 mb-4 text-center">
+              ID Preview
+            </h4>
+            <img
+              [src]="documentPreviews['id']"
+              alt="ID Preview"
+              class="w-48 h-48 object-cover rounded-lg mx-auto"
+            />
+            <button
+              type="button"
+              (click)="clearDocument('id')"
+              class="absolute top-2 right-2 bg-red-500 text-white text-xs p-1 rounded-full hover:bg-red-600"
+              title="Remove ID"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+
+        <!-- PCC Number Upload Field -->
+        <div>
+          <label
+            class="block mb-2 text-sm font-medium text-gray-700"
+            for="pccnoUpload"
+            >Upload PCC Number</label
+          >
+          <input
+            id="pccnoUpload"
+            type="file"
+            (change)="onDocumentSelected($event, 'pccno')"
+            accept="image/*"
+            class="block w-full text-sm text-gray-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <p class="mt-1 text-xs text-gray-500">
+            Acceptable formats: JPG, PNG. Max size: 5MB.
+          </p>
+          <!-- Preview -->
+          <div
+            *ngIf="documentPreviews['pccno']"
+            class="relative mt-4 p-4 border border-gray-300 rounded-lg shadow-lg bg-white"
+          >
+            <h4 class="text-sm font-medium text-gray-600 mb-4 text-center">
+              PCC Number Preview
+            </h4>
+            <img
+              [src]="documentPreviews['pccno']"
+              alt="PCC Number Preview"
+              class="w-48 h-48 object-cover rounded-lg mx-auto"
+            />
+            <button
+              type="button"
+              (click)="clearDocument('pccno')"
+              class="absolute top-2 right-2 bg-red-500 text-white text-xs p-1 rounded-full hover:bg-red-600"
+              title="Remove PCC Number"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+
+        <!-- Training Certificate Upload Field -->
+        <div>
+          <label
+            class="block mb-2 text-sm font-medium text-gray-700"
+            for="trainingcertificateUpload"
+            >Upload Training Certificate</label
+          >
+          <input
+            id="trainingcertificateUpload"
+            type="file"
+            (change)="onDocumentSelected($event, 'trainingcertificate')"
+            accept="image/*"
+            class="block w-full text-sm text-gray-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <p class="mt-1 text-xs text-gray-500">
+            Acceptable formats: JPG, PNG. Max size: 5MB.
+          </p>
+          <!-- Preview -->
+          <div
+            *ngIf="documentPreviews['trainingcertificate']"
+            class="relative mt-4 p-4 border border-gray-300 rounded-lg shadow-lg bg-white"
+          >
+            <h4 class="text-sm font-medium text-gray-600 mb-4 text-center">
+              Training Certificate Preview
+            </h4>
+            <img
+              [src]="documentPreviews['trainingcertificate']"
+              alt="Training Certificate Preview"
+              class="w-48 h-48 object-cover rounded-lg mx-auto"
+            />
+            <button
+              type="button"
+              (click)="clearDocument('trainingcertificate')"
+              class="absolute top-2 right-2 bg-red-500 text-white text-xs p-1 rounded-full hover:bg-red-600"
+              title="Remove Training Certificate"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Photo Section -->
+    <div
+      class="bg-white p-6 md:p-8 border border-gray-300 rounded-lg shadow-sm"
+    >
+      <h3 class="text-lg md:text-xl font-semibold text-gray-700 mb-6">
+        Upload Photo
+      </h3>
+      <div class="flex flex-col md:flex-row items-center space-x-6">
+        <!-- File Input Section -->
+        <div class="flex flex-col items-center">
+          <input
+            type="file"
+            (change)="onPhotoSelected($event)"
+            accept="image/*"
+            class="block text-sm text-gray-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <p class="mt-1 text-xs text-gray-500">
+            Acceptable formats: JPG, PNG. Max size: 5MB.
           </p>
         </div>
 
-        <!-- Photo Preview -->
+        <!-- Photo Preview Section -->
         <div
           *ngIf="photoPreview"
-          class="relative p-4 border border-gray-300 rounded-lg shadow-lg bg-white"
+          class="flex flex-col items-center mt-4 md:mt-0"
         >
-          <h4 class="text-sm font-medium text-gray-600 mb-4 text-center">
-            Photo Preview
-          </h4>
           <img
             [src]="photoPreview"
             alt="Photo Preview"
-            class="w-48 h-48 object-cover rounded-lg mx-auto"
+            class="w-48 h-48 object-cover rounded-lg"
           />
           <button
             type="button"
             (click)="clearPhoto()"
-            class="absolute top-2 right-2 bg-red-500 text-white text-xs p-1 rounded-full hover:bg-red-600"
+            class="mt-2 bg-red-500 text-white text-xs p-1 rounded-full hover:bg-red-600"
             title="Remove Photo"
           >
             ✕
@@ -169,20 +359,14 @@
       </div>
     </div>
 
-    <!-- Buttons -->
-    <div class="flex justify-end gap-3">
+    <!-- Submit Button -->
+    <div class="flex justify-end mt-8">
       <button
         type="submit"
-        class="w-full md:w-auto text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5"
+        [disabled]="watchmenForm.invalid"
+        class="px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 focus:outline-none"
       >
-        {{ isEditMode ? "Update" : "Submit" }}
-      </button>
-      <button
-        type="button"
-        (click)="onReset()"
-        class="w-full md:w-auto text-gray-700 bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-gray-400 font-medium rounded-lg text-sm px-5 py-2.5"
-      >
-        Reset
+        {{ isEditMode ? "Update" : "Add" }} Watchmen
       </button>
     </div>
   </form>

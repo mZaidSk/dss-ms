@@ -14,33 +14,34 @@
 
   <!-- Room Details Section -->
   <div *ngIf="room$ | async as room; else loading">
-    <div
-      class="p-6 bg-gray-100 border-l-4 border-blue-600 rounded-lg mb-8 shadow-md"
-    >
+    <div class="bg-white rounded-lg mb-8">
       <h3 class="text-xl font-semibold text-gray-900 mb-4">Room Information</h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-        <p class="text-base text-gray-700">
-          <span class="font-bold text-gray-900">Room ID:</span>
-          {{ room.roomId }}
-        </p>
-        <p class="text-base text-gray-700">
-          <span class="font-bold text-gray-900">Wing:</span> {{ room.wing }}
-        </p>
-        <p class="text-base text-gray-700">
-          <span class="font-bold text-gray-900">Floor:</span> {{ room.floor }}
-        </p>
-        <p class="text-base text-gray-700">
-          <span class="font-bold text-gray-900">Room Number:</span>
-          {{ room.roomNumber }}
-        </p>
-        <p class="text-base text-gray-700">
-          <span class="font-bold text-gray-900">Password:</span> ********
-        </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex items-center">
+          <span class="font-semibold text-gray-900 mr-2">Room ID:</span>
+          <span>{{ room.roomId }}</span>
+        </div>
+        <div class="flex items-center">
+          <span class="font-semibold text-gray-900 mr-2">Wing:</span>
+          <span>{{ room.wing }}</span>
+        </div>
+        <div class="flex items-center">
+          <span class="font-semibold text-gray-900 mr-2">Floor:</span>
+          <span>{{ room.floor }}</span>
+        </div>
+        <div class="flex items-center">
+          <span class="font-semibold text-gray-900 mr-2">Room Number:</span>
+          <span>{{ room.roomNumber }}</span>
+        </div>
+        <div class="flex items-center">
+          <span class="font-semibold text-gray-900 mr-2">Password:</span>
+          <span>{{ room.password }}</span>
+        </div>
       </div>
     </div>
 
     <!-- Visitors Section -->
-    <div
+    <!-- <div
       class="p-6 bg-gray-100 border-l-4 border-green-600 rounded-lg shadow-md"
     >
       <h3 class="text-xl font-semibold text-gray-900 mb-6">Visitors</h3>
@@ -63,7 +64,6 @@
               <p class="text-sm text-gray-500">Phone: {{ visitor.phoneNo }}</p>
             </div>
 
-            <!-- Status Badge -->
             <span
               class="ml-auto px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-semibold shadow-md"
             >
@@ -87,7 +87,7 @@
           </p>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 
   <!-- Loading Template -->

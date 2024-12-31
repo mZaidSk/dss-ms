@@ -137,14 +137,18 @@ export class BuildingService {
     console.log(wings);
 
     const batch = writeBatch(this.firestore);
-    const rooms: {
+    type rooms = {
       roomId: string;
+      PhoneNumber: string;
+      name: string;
       wing: string;
       floor: number;
       roomNumber: number;
       username: string;
       password: string;
-    }[] = [];
+      status: string;
+      isFirst: boolean;
+    };
 
     wings.forEach((wing) => {
       for (let floor = 1; floor <= wing.numberOfFloors; floor++) {
@@ -152,13 +156,17 @@ export class BuildingService {
           const roomId = `${wing.wingName}-${floor
             .toString()
             .padStart(2, '0')}${room.toString().padStart(2, '0')}`;
-          const roomData = {
+          const roomData: rooms = {
             roomId,
+            PhoneNumber: '',
+            name: '',
             wing: wing.wingName,
             floor,
             roomNumber: room,
             username: buildingId + '_' + roomId,
             password: 'password',
+            status: '',
+            isFirst: false,
           };
 
           const roomDocRef = doc(

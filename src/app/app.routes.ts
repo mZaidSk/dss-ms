@@ -18,7 +18,10 @@ export const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        loadChildren: () => import('./features/dashboard/dashboard.module').then((mod) => mod.DashboardModule)
+        loadChildren: () =>
+          import('./features/dashboard/dashboard.module').then(
+            (mod) => mod.DashboardModule
+          ),
       },
       {
         path: '',
@@ -27,18 +30,32 @@ export const routes: Routes = [
       },
       {
         path: 'building',
-        loadChildren: () => import('./features/building/building.module').then((mod) => mod.BuildingModule)
+        loadChildren: () =>
+          import('./features/building/building.module').then(
+            (mod) => mod.BuildingModule
+          ),
       },
       {
         path: 'watchmen',
-        loadChildren: () => import('./features/watchmen/watchmen.module').then((mod) => mod.watchmenModule)
+        loadChildren: () =>
+          import('./features/watchmen/watchmen.module').then(
+            (mod) => mod.watchmenModule
+          ),
       },
       {
-        path: 'todo',
-        loadChildren: () => import('./features/todo/todo.module').then((mod) => mod.TodoModule)
-      }
-    ]
-
-  }
-
+        path: 'watchmen-assignments',
+        loadChildren: () =>
+          import(
+            './features/watchmen-assignments/watchmen-assignments.module'
+          ).then((mod) => mod.WatchmenAssignmentsModule),
+      },
+      {
+        path: 'feedback',
+        loadChildren: () =>
+          import('./features/feedback/feedback.module').then(
+            (mod) => mod.FeedbackModule
+          ),
+      },
+    ],
+  },
 ];

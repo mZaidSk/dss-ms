@@ -6,7 +6,7 @@
         <th *ngFor="let col of columns" scope="col" class="px-6 py-3">
           {{ col.display }}
         </th>
-        <th scope="col" class="px-6 py-3">Actions</th>
+        <th scope="col" class="px-6 py-3" *ngIf="showAction">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -33,7 +33,7 @@
         >
           {{ row[col.key] }}
         </td>
-        <td class="px-6 py-4">
+        <td class="px-6 py-4" *ngIf="showAction">
           <button
             (click)="viewRow(row)"
             class="font-medium text-yellow-600 hover:underline"
